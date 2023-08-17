@@ -36,6 +36,10 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.59.2"
-  }
+    "sass": "^1.65.1"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
