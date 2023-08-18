@@ -1,19 +1,14 @@
 import React from "react";
-
 import "../styles/TopicListItem.scss";
 
-const sampleDataForTopicListItem = {
-  id: "1",
-  slug: "topic-1",
-  label: "Nature",
-};
+function TopicListItem(props) {
+  const { id, slug, title } = props.topicData;
 
-const TopicListItem = () => {
   return (
     <div className="topic-list__item">
-      {/* Insert React */}
+      <span className="topic-list__item span">{title}</span> <br />
     </div>
   );
-};
+}
 
 export default TopicListItem;
