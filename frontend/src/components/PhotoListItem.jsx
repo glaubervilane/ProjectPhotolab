@@ -2,13 +2,16 @@ import React from "react";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-function PhotoListItem(props) {
-  const { id, location, urls, user } = props.photoData;
+function PhotoListItem({ photoData, onToggleFavorite, isFavorited }) {
+  const { id, location, urls, user } = photoData;
 
   return (
     <div className="photo-list__item">
       <div className="photo-image">
-        <PhotoFavButton />
+        <PhotoFavButton
+          onToggleFavorite={() => onToggleFavorite(id)}
+          isFavorited={isFavorited}
+        />
         <img src={urls.regular} alt={`Photo by ${user.username}`} className="photo-list__image" />
       </div>
       <div className="photo-list__user-details">
