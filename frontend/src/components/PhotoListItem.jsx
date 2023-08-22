@@ -1,8 +1,9 @@
 import React from "react";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
+import "../styles/PhotoDetailsModal.scss"; 
 
-function PhotoListItem({ photoData, onToggleFavorite, isFavorited }) {
+function PhotoListItem({ photoData, onToggleFavorite, isFavorited, onToggleModal, isModalOpen, selectedPhotoData }) {
   const { id, location, urls, user } = photoData;
 
   return (
@@ -12,10 +13,17 @@ function PhotoListItem({ photoData, onToggleFavorite, isFavorited }) {
           onToggleFavorite={() => onToggleFavorite(id)}
           isFavorited={isFavorited}
         />
-        <img src={urls.regular} alt={`Photo by ${user.username}`} className="photo-list__image" />
+        <img
+          src={urls.regular}
+          alt={`Photo by ${user.username}`}
+          className="photo-list__image"
+          onClick={() => onToggleModal(photoData)}
+        />
       </div>
       <div className="photo-list__user-details">
-        <img src={user.profile} alt={`Profile of ${user.username}`} className="photo-list__user-profile" />
+        <img src={user.profile} 
+          alt={`Profile of ${user.username}`} 
+          className="photo-list__user-profile" />
         <div className="photo-list__user-info">
           <span className="username">{user.name}</span> <br />
           <span className="photo-list__user-location">{location.city}, {location.country}</span>
