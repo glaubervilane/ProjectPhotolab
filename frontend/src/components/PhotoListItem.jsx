@@ -3,8 +3,13 @@ import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 import "../styles/PhotoDetailsModal.scss"; 
 
-function PhotoListItem({ photoData, onToggleFavorite, isFavorited, onToggleModal, isModalOpen, selectedPhotoData }) {
-  const { id, location, urls, user } = photoData;
+function PhotoListItem({
+  photoData,
+  onToggleFavorite,
+  isFavorited,
+  onToggleModal,
+}) {
+  const { id, location, urls, user, similar_photos } = photoData;
 
   return (
     <div className="photo-list__item">
@@ -21,12 +26,16 @@ function PhotoListItem({ photoData, onToggleFavorite, isFavorited, onToggleModal
         />
       </div>
       <div className="photo-list__user-details">
-        <img src={user.profile} 
-          alt={`Profile of ${user.username}`} 
-          className="photo-list__user-profile" />
+        <img
+          src={user.profile}
+          alt={`Profile of ${user.username}`}
+          className="photo-list__user-profile"
+        />
         <div className="photo-list__user-info">
           <span className="username">{user.name}</span> <br />
-          <span className="photo-list__user-location">{location.city}, {location.country}</span>
+          <span className="photo-list__user-location">
+            {location.city}, {location.country}
+          </span>
         </div>
       </div>
     </div>
