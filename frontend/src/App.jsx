@@ -43,22 +43,38 @@ const App = () => {
           <button className="photo-details-modal__close-button" onClick={closeModal}>
             X
           </button>
-          {/* Display modal image */}<div className="photo-details-modal__images">
-            <img src={selectedPhotoData.urls.full} className="photo-details-modal__image" alt={`Larger Photo by ${selectedPhotoData.user.username}`} />
+          {/* Display modal image */}
+          <div className="photo-details-modal__images">
+            {/* PhotoFavButton for the main image */}
+            <div className="photo-image">
+              <PhotoFavButton
+                onToggleFavorite={() => toggleFavorite(selectedPhotoData.id)}
+                isFavorited={isMainPhotoFavorited()}
+              />
+              <img src={selectedPhotoData.urls.full} className="photo-details-modal__image" alt={`Larger Photo by ${selectedPhotoData.user.username}`} />
+            </div>
             <div className="photo-details-modal__header">Similar Photos</div>
             {/* Display similar photos */}
-            <div className="photo-details-modal__similar-photos">
+            <div className={`photo-details-modal__similar-photos ${similarPhotos.length > 3 ? 'wrap' : ''}`}>
               {similarPhotos.slice(0, 3).map(photo => (
-                <img
-                  key={photo.id}
-                  src={photo.urls.regular}
-                  className="photo-details-modal__similar-photo"
-                  alt={`Similar Photo by ${photo.user.username}`}
-                />
+                <div className="photo-details-modal__image" key={photo.id}>
+                  <div className="photo-details-modal__top-bar">
+                    <PhotoFavButton
+                      onToggleFavorite={() => toggleFavorite(photo.id)}
+                      isFavorited={isMainPhotoFavorited()}
+                    />
+                  </div>
+                  <img
+                    src={photo.urls.regular}
+                    className="photo-details-modal__similar-photo"
+                    alt={`Similar Photo by ${photo.user.username}`}
+                    onClick={() => toggleModal(photo)}
+                  />
+                </div>
               ))}
             </div>
           </div>
-          </div>
+        </div>
       )}
     </div>
   );
