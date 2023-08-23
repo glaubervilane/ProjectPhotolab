@@ -55,15 +55,13 @@ const App = () => {
             </div>
             <div className="photo-details-modal__header">Similar Photos</div>
             {/* Display similar photos */}
-            <div className={`photo-details-modal__similar-photos ${similarPhotos.length > 3 ? 'wrap' : ''}`}>
+            <div className={`photo-details-modal__similar-photo ${similarPhotos.length > 3 ? 'wrap' : ''}`}>
               {similarPhotos.slice(0, 3).map(photo => (
                 <div className="photo-details-modal__image" key={photo.id}>
-                  <div className="photo-details-modal__top-bar">
                     <PhotoFavButton
                       onToggleFavorite={() => toggleFavorite(photo.id)}
                       isFavorited={isMainPhotoFavorited()}
                     />
-                  </div>
                   <img
                     src={photo.urls.regular}
                     className="photo-details-modal__similar-photo"
