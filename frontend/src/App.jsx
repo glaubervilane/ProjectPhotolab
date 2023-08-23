@@ -1,37 +1,21 @@
 import React, { useState } from 'react';
+import useApplicationData from './hooks/useApplicationData';
 import HomeRoute from './components/HomeRoute';
 import PhotoFavButton from './components/PhotoFavButton';
-import TopNavigationBar from './components/TopNavigationBar';
 import './App.scss';
 import './styles/PhotoDetailsModal.scss';
 import similarPhotos from './mocks/photos';
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPhotoData, setSelectedPhotoData] = useState(null);
-  const [favoritedPhotos, setFavoritedPhotos] = useState([]);
-
-  const toggleModal = (photoData) => {
-    setIsModalOpen(!isModalOpen);
-    setSelectedPhotoData(photoData);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedPhotoData(null);
-  };
-
-  const toggleFavorite = (photoId) => {
-    if (favoritedPhotos.includes(photoId)) {
-      setFavoritedPhotos(favoritedPhotos.filter(id => id !== photoId));
-    } else {
-      setFavoritedPhotos([...favoritedPhotos, photoId]);
-    }
-  };
-
-  const isPhotoFavorited = (photoId) => {
-    return favoritedPhotos.includes(photoId);
-  };
+  const {
+    isModalOpen,
+    selectedPhotoData,
+    toggleModal,
+    closeModal,
+    favoritedPhotos,
+    toggleFavorite,
+    isPhotoFavorited,
+  } = useApplicationData();
 
   return (
     <div className="App">
