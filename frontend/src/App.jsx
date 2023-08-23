@@ -9,6 +9,7 @@ import similarPhotos from './mocks/photos';
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhotoData, setSelectedPhotoData] = useState(null);
+  const [favoritedPhotos, setFavoritedPhotos] = useState([]);
 
   const toggleModal = (photoData) => {
     setIsModalOpen(!isModalOpen);
@@ -20,9 +21,6 @@ const App = () => {
     setSelectedPhotoData(null);
   };
 
-  const [favoritedPhotos, setFavoritedPhotos] = useState([]);
-
-  // Function to toggle favorite for the main photo
   const toggleFavorite = (photoId) => {
     if (favoritedPhotos.includes(photoId)) {
       setFavoritedPhotos(favoritedPhotos.filter(id => id !== photoId));
@@ -31,14 +29,12 @@ const App = () => {
     }
   };
 
-  // Determine if a photo is favorited
   const isPhotoFavorited = (photoId) => {
     return favoritedPhotos.includes(photoId);
   };
 
   return (
     <div className="App">
-      <TopNavigationBar favoritedCount={favoritedPhotos.length} />
       <HomeRoute
         openModal={toggleModal}
         isModalOpen={isModalOpen}
