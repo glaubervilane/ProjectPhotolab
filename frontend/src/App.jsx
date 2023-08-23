@@ -19,14 +19,20 @@ const App = () => {
     setSelectedPhotoData(null);
   };
 
+  const [favoritedPhotos, setFavoritedPhotos] = useState([]);
+
   // Function to toggle favorite for the main photo
   const toggleFavorite = (photoId) => {
-    // Add your logic to toggle favorite for the main photo
+    if (favoritedPhotos.includes(photoId)) {
+      setFavoritedPhotos(favoritedPhotos.filter(id => id !== photoId));
+    } else {
+      setFavoritedPhotos([...favoritedPhotos, photoId]);
+    }
   };
 
-  // Determine if the main photo is favorited
-  const isMainPhotoFavorited = () => {
-    // Add your logic to check if the main photo is favorited
+  // Determine if a photo is favorited
+  const isPhotoFavorited = (photoId) => {
+    return favoritedPhotos.includes(photoId);
   };
 
   return (
@@ -35,6 +41,8 @@ const App = () => {
         openModal={toggleModal}
         isModalOpen={isModalOpen}
         selectedPhotoData={selectedPhotoData}
+        favoritedPhotos={favoritedPhotos}
+        onToggleFavorite={toggleFavorite}
       />
       {/* Modal */}
       {isModalOpen && selectedPhotoData && (
@@ -49,7 +57,7 @@ const App = () => {
             <div className="photo-image">
               <PhotoFavButton
                 onToggleFavorite={() => toggleFavorite(selectedPhotoData.id)}
-                isFavorited={isMainPhotoFavorited()}
+                isFavorited={isPhotoFavorited(selectedPhotoData.id)}
               />
               <img src={selectedPhotoData.urls.full} className="photo-details-modal__image" alt={`Larger Photo by ${selectedPhotoData.user.username}`} />
             </div>
@@ -60,7 +68,7 @@ const App = () => {
                 <div className="photo-details-modal__image" key={photo.id}>
                     <PhotoFavButton
                       onToggleFavorite={() => toggleFavorite(photo.id)}
-                      isFavorited={isMainPhotoFavorited()}
+                      isFavorited={isPhotoFavorited(photo.id)}
                     />
                   <img
                     src={photo.urls.regular}
