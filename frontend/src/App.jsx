@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import HomeRoute from './components/HomeRoute';
 import PhotoFavButton from './components/PhotoFavButton';
+import TopNavigationBar from './components/TopNavigationBar';
 import './App.scss';
 import './styles/PhotoDetailsModal.scss';
 import similarPhotos from './mocks/photos';
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <TopNavigationBar favoritedCount={favoritedPhotos.length} />
       <HomeRoute
         openModal={toggleModal}
         isModalOpen={isModalOpen}
