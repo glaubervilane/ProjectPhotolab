@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import useApplicationData from './hooks/useApplicationData';
+import React, { useEffect } from 'react';
+import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
 import HomeRoute from './components/HomeRoute';
 import PhotoFavButton from './components/PhotoFavButton';
 import './App.scss';
@@ -15,8 +15,21 @@ const App = () => {
     favoritedPhotos,
     toggleFavorite,
     isPhotoFavorited,
+    dispatch,
   } = useApplicationData();
 
+  useEffect(() => {
+    fetch('/api/photos')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  
   return (
     <div className="App">
       <HomeRoute
