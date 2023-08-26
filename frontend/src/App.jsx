@@ -15,20 +15,8 @@ const App = () => {
     favoritedPhotos,
     toggleFavorite,
     isPhotoFavorited,
-    dispatch,
+    photoData,
   } = useApplicationData();
-
-  useEffect(() => {
-    fetch('/api/photos')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
   
   return (
     <div className="App">
@@ -38,6 +26,7 @@ const App = () => {
         selectedPhotoData={selectedPhotoData}
         favoritedPhotos={favoritedPhotos}
         onToggleFavorite={toggleFavorite}
+        photoData={photoData}
       />
       {/* Modal */}
       {isModalOpen && selectedPhotoData && (
@@ -58,8 +47,8 @@ const App = () => {
             </div>
             <div className="photo-details-modal__header">Similar Photos</div>
             {/* Display similar photos */}
-            <div className={`photo-details-modal__similar-photo ${similarPhotos.length > 3 ? 'wrap' : ''}`}>
-              {similarPhotos.slice(0, 3).map(photo => (
+            <div className={`photo-details-modal__similar-photo ${selectedPhotoData.similarPhotos?.length > 3 ? 'wrap' : ''}`}>
+              {selectedPhotoData.similar_photos?.slice(0, 3).map(photo => (
                 <div className="photo-details-modal__image" key={photo.id}>
                     <PhotoFavButton
                       onToggleFavorite={() => toggleFavorite(photo.id)}

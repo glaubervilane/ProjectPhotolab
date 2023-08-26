@@ -4,7 +4,7 @@ import PhotoList from './PhotoList';
 import TopNavigationBar from './TopNavigationBar';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos, onToggleFavorite }) => {
+const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos, onToggleFavorite, photoData }) => {
   return (
     <div className="home-route">
       <TopNavigationBar favoritedCount={favoritedPhotos.length} />
@@ -13,6 +13,7 @@ const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos,
         favoritedPhotos={favoritedPhotos}
         onToggleModal={openModal}
         isModalOpen={isModalOpen}
+        photoData={photoData}
         selectedPhotoData={selectedPhotoData}
       />
     </div>

@@ -18,7 +18,7 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case ACTIONS.SET_PHOTO_DATA: // Add this case
+    case ACTIONS.SET_PHOTO_DATA:
       return { ...state, photoData: action.payload 
       };
     case ACTIONS.TOGGLE_MODAL:
@@ -50,7 +50,7 @@ function reducer(state, action) {
 }
 
 const useApplicationData = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState); 
 
   const toggleModal = (photoData) => {
     dispatch({ type: ACTIONS.TOGGLE_MODAL, payload: photoData });
@@ -66,7 +66,19 @@ const useApplicationData = () => {
 
   const isPhotoFavorited = (photoId) => {
     return state.favoritedPhotos.includes(photoId);
-  };
+  };  
+
+  useEffect(() => {
+    fetch('/api/photos')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return {
     isModalOpen: state.isModalOpen,
@@ -76,6 +88,7 @@ const useApplicationData = () => {
     favoritedPhotos: state.favoritedPhotos,
     toggleFavorite,
     isPhotoFavorited,
+    photoData: state.photoData,
   };
 };
 

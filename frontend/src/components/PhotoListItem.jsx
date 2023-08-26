@@ -9,7 +9,7 @@ function PhotoListItem({
   isFavorited,
   onToggleModal,
 }) {
-  const { id, location, urls, user, similar_photos } = photoData;
+  const { id, location, urls, user } = photoData;
 
   return (
     <div className="photo-list__item">
