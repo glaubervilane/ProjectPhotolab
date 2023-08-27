@@ -1,6 +1,5 @@
 import React from "react";
 import PhotoListItem from "./PhotoListItem";
-
 import "../styles/PhotoList.scss";
 
 const PhotoList = ({ onToggleFavorite, favoritedPhotos, onToggleModal, photoData }) => {

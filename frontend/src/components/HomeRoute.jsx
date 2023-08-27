@@ -1,4 +1,3 @@
-// HomeRoute.jsx
 import React from 'react';
 import PhotoList from './PhotoList';
 import TopNavigationBar from './TopNavigationBar';
