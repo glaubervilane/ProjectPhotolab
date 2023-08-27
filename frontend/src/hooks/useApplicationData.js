@@ -7,6 +7,7 @@ export const ACTIONS = {
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   FETCH_TOPIC_PHOTOS: 'FETCH_TOPIC_PHOTOS',
+  RESET_TOPIC_PHOTOS: 'RESET_TOPIC_PHOTOS',
 };
 
 const initialState = {
@@ -29,8 +30,8 @@ function reducer(state, action) {
     case ACTIONS.FETCH_TOPIC_PHOTOS:
       return { ...state, currentTopic: action.payload 
     };
-    case ACTIONS.SET_TOPIC_PHOTOS:
-      return { ...state, photoData: action.payload 
+    case ACTIONS.RESET_TOPIC_PHOTOS:
+      return { ...state, currentTopic: null 
     };
     case ACTIONS.TOGGLE_MODAL:
       return {
@@ -77,6 +78,10 @@ const useApplicationData = () => {
 
   const fetchTopicPhotos = (topicId) => {
     dispatch({ type: ACTIONS.FETCH_TOPIC_PHOTOS, payload: topicId });
+  }; 
+
+  const resetTopicPhotos = () => {
+    dispatch({ type: ACTIONS.RESET_TOPIC_PHOTOS });
   };  
 
   const isPhotoFavorited = (photoId) => {
@@ -84,7 +89,7 @@ const useApplicationData = () => {
   };  
 
   useEffect(() => {
-    fetch('/api/photos')
+    !state.currentTopic && fetch('/api/photos')
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -93,7 +98,7 @@ const useApplicationData = () => {
       .catch((error) => {
         console.error('Error fetching photos:', error);
       });
-  }, []);
+  }, [state.currentTopic]);
   
   useEffect(() => {
     fetch('/api/topics')
@@ -103,7 +108,7 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching topics:', error);
       });
   }, []);
   
@@ -115,7 +120,7 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching topic/photos:', error);
       });
   }, [state.currentTopic]);
 
@@ -130,6 +135,7 @@ const useApplicationData = () => {
     photoData: state.photoData,
     topicData: state.topicData,
     fetchTopicPhotos,
+    resetTopicPhotos,
   };
 };
 

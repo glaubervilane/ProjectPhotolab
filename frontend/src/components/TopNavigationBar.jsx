@@ -3,10 +3,13 @@ import TopicList from './TopicList';
 import FavBadge from './FavBadge';
 import '../styles/TopNavigationBar.scss';
 
-const TopNavigationBar = ({ favoritedCount, topicData, fetchTopicPhotos }) => {
+const TopNavigationBar = ({ favoritedCount, topicData, fetchTopicPhotos, resetTopicPhotos }) => {
   return (
     <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
+      <a className="top-nav-bar__logo" href="#" onClick={(e) => {
+        e.preventDefault()
+        resetTopicPhotos()
+      }}>PhotoLabs</a>
       <TopicList  
         topicData={topicData} 
         fetchTopicPhotos={fetchTopicPhotos}

@@ -4,7 +4,7 @@ import "../styles/TopicListItem.scss";
 function TopicListItem({ topicData:{ id, title }, fetchTopicPhotos}) {
   return (
     <div className="topic-list__item">
-      <a className="topic-list__item span" href="#" onClick={(e) => {
+      <a href="#" onClick={(e) => {
         e.preventDefault()
         fetchTopicPhotos(id)
       }}>{title}</a>
