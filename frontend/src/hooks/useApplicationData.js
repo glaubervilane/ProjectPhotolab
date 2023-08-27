@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react";
 
+// Define action types for the reducer
 export const ACTIONS = {
   TOGGLE_MODAL: 'TOGGLE_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
@@ -10,6 +11,7 @@ export const ACTIONS = {
   RESET_TOPIC_PHOTOS: 'RESET_TOPIC_PHOTOS',
 };
 
+// Define the initial state for the reducer
 const initialState = {
   isModalOpen: false,
   selectedPhotoData: null,
@@ -19,6 +21,7 @@ const initialState = {
   currentTopic: null
 };
 
+// Define the reducer function to handle different actions
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_PHOTO_DATA:
@@ -61,9 +64,11 @@ function reducer(state, action) {
   }
 }
 
+// Custom hook to manage application data
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState); 
 
+  // Define actions to update the state
   const toggleModal = (photoData) => {
     dispatch({ type: ACTIONS.TOGGLE_MODAL, payload: photoData });
   };
@@ -88,6 +93,7 @@ const useApplicationData = () => {
     return state.favoritedPhotos.includes(photoId);
   };  
 
+  // Fetch initial photo data when the component mounts
   useEffect(() => {
     !state.currentTopic && fetch('/api/photos')
       .then((response) => response.json())
@@ -100,6 +106,7 @@ const useApplicationData = () => {
       });
   }, [state.currentTopic]);
   
+  // Fetch topic data when the component mounts
   useEffect(() => {
     fetch('/api/topics')
       .then((response) => response.json())
@@ -112,6 +119,7 @@ const useApplicationData = () => {
       });
   }, []);
   
+  // Fetch photos for the selected topic
   useEffect(() => {
     state.currentTopic && fetch(`/api/topics/photos/${state.currentTopic}`)
       .then((response) => response.json())
@@ -124,6 +132,7 @@ const useApplicationData = () => {
       });
   }, [state.currentTopic]);
 
+  // Return data and actions to be used in components
   return {
     isModalOpen: state.isModalOpen,
     selectedPhotoData: state.selectedPhotoData,

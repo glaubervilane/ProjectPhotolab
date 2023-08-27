@@ -6,12 +6,14 @@ import '../styles/HomeRoute.scss';
 const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos, onToggleFavorite, photoData, topicData, fetchTopicPhotos, resetTopicPhotos }) => {
   return (
     <div className="home-route">
+    {/* Top navigation bar */}
       <TopNavigationBar 
         favoritedCount={favoritedPhotos.length} 
         topicData={topicData} 
         fetchTopicPhotos={fetchTopicPhotos}
         resetTopicPhotos={resetTopicPhotos}
       />
+      {/* PhotoList component */}
       <PhotoList
         onToggleFavorite={onToggleFavorite}
         favoritedPhotos={favoritedPhotos}

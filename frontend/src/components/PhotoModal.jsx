@@ -12,6 +12,7 @@ function PhotoModal({
 }) {
   return (
     <div className={`photo-details-modal ${isModalOpen ? "open" : ""}`}>
+      {/* Close button */}
       <button
         className="photo-details-modal__close-button"
         onClick={closeModal}
@@ -19,7 +20,9 @@ function PhotoModal({
         X
       </button>
       <div className="photo-details-modal__images">
+        {/* Main image */}
         <div className="photo-image">
+          {/* PhotoFavButton for the main image */}
           <PhotoFavButton
             onToggleFavorite={() =>
               toggleFavorite(selectedPhotoData.id)
@@ -32,6 +35,7 @@ function PhotoModal({
             alt={`Larger Photo by ${selectedPhotoData.user.username}`}
           />
         </div>
+        {/* Display similar photos */}
         <div className="photo-details-modal__header">Similar Photos</div>
         <div
           className={`photo-details-modal__similar-photo ${

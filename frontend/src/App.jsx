@@ -2,11 +2,11 @@ import React from 'react';
 import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
 import PhotoModal from "./components/PhotoModal";
 import HomeRoute from './components/HomeRoute';
-import PhotoFavButton from './components/PhotoFavButton';
 import './App.scss';
 import './styles/PhotoDetailsModal.scss';
 
 const App = () => {
+  // Initialize application data using custom hook
   const {
     isModalOpen,
     selectedPhotoData,
@@ -23,6 +23,7 @@ const App = () => {
   
   return (
     <div className="App">
+    {/* Render the main content */}
       <HomeRoute
         openModal={toggleModal}
         isModalOpen={isModalOpen}
@@ -34,7 +35,7 @@ const App = () => {
         fetchTopicPhotos={fetchTopicPhotos}
         resetTopicPhotos={resetTopicPhotos}
       />
-      {/* Modal */}
+      {/* Render the modal if it's open */}
       {isModalOpen && selectedPhotoData && (
         <PhotoModal
           selectedPhotoData={selectedPhotoData}
