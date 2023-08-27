@@ -15,7 +15,8 @@ const App = () => {
     toggleFavorite,
     isPhotoFavorited,
     photoData,
-    topicData,
+    topicData,    
+    fetchTopicPhotos,
   } = useApplicationData();
   
   return (
@@ -28,6 +29,7 @@ const App = () => {
         onToggleFavorite={toggleFavorite}
         photoData={photoData}
         topicData={topicData}
+        fetchTopicPhotos={fetchTopicPhotos}
       />
       {/* Modal */}
       {isModalOpen && selectedPhotoData && (

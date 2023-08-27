@@ -1,5 +1,4 @@
-// hooks/useApplicationData.js
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 
 export const ACTIONS = {
   TOGGLE_MODAL: 'TOGGLE_MODAL',
@@ -7,6 +6,7 @@ export const ACTIONS = {
   TOGGLE_FAVORITE: 'TOGGLE_FAVORITE',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  FETCH_TOPIC_PHOTOS: 'FETCH_TOPIC_PHOTOS',
 };
 
 const initialState = {
@@ -14,7 +14,8 @@ const initialState = {
   selectedPhotoData: null,
   favoritedPhotos: [],
   photoData: [],
-  topicData: []
+  topicData: [],
+  currentTopic: null
 };
 
 function reducer(state, action) {
@@ -24,6 +25,12 @@ function reducer(state, action) {
       };
     case ACTIONS.SET_TOPIC_DATA:
       return { ...state, topicData: action.payload 
+    };
+    case ACTIONS.FETCH_TOPIC_PHOTOS:
+      return { ...state, currentTopic: action.payload 
+    };
+    case ACTIONS.SET_TOPIC_PHOTOS:
+      return { ...state, photoData: action.payload 
     };
     case ACTIONS.TOGGLE_MODAL:
       return {
@@ -68,6 +75,10 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.TOGGLE_FAVORITE, payload: photoId });
   };
 
+  const fetchTopicPhotos = (topicId) => {
+    dispatch({ type: ACTIONS.FETCH_TOPIC_PHOTOS, payload: topicId });
+  };  
+
   const isPhotoFavorited = (photoId) => {
     return state.favoritedPhotos.includes(photoId);
   };  
@@ -80,7 +91,7 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching photos:', error);
       });
   }, []);
   
@@ -95,6 +106,18 @@ const useApplicationData = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
+  
+  useEffect(() => {
+    state.currentTopic && fetch(`/api/topics/photos/${state.currentTopic}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, [state.currentTopic]);
 
   return {
     isModalOpen: state.isModalOpen,
@@ -106,6 +129,7 @@ const useApplicationData = () => {
     isPhotoFavorited,
     photoData: state.photoData,
     topicData: state.topicData,
+    fetchTopicPhotos,
   };
 };
 

@@ -1,12 +1,13 @@
 import React from "react";
 import "../styles/TopicListItem.scss";
 
-function TopicListItem(props) {
-  const { id, slug, title } = props.topicData;
-
+function TopicListItem({ topicData:{ id, title }, fetchTopicPhotos}) {
   return (
     <div className="topic-list__item">
-      <span className="topic-list__item span">{title}</span> <br />
+      <a className="topic-list__item span" href="#" onClick={(e) => {
+        e.preventDefault()
+        fetchTopicPhotos(id)
+      }}>{title}</a>
     </div>
   );
 }
