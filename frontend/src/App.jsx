@@ -4,7 +4,6 @@ import HomeRoute from './components/HomeRoute';
 import PhotoFavButton from './components/PhotoFavButton';
 import './App.scss';
 import './styles/PhotoDetailsModal.scss';
-import similarPhotos from './mocks/photos';
 
 const App = () => {
   const {
@@ -16,6 +15,7 @@ const App = () => {
     toggleFavorite,
     isPhotoFavorited,
     photoData,
+    topicData,
   } = useApplicationData();
   
   return (
@@ -27,6 +27,7 @@ const App = () => {
         favoritedPhotos={favoritedPhotos}
         onToggleFavorite={toggleFavorite}
         photoData={photoData}
+        topicData={topicData}
       />
       {/* Modal */}
       {isModalOpen && selectedPhotoData && (

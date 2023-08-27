@@ -1,10 +1,11 @@
 import React from "react";
 import PhotoListItem from "./PhotoListItem";
-import photos from "../mocks/photos";
+import useApplicationData, { ACTIONS } from "../hooks/useApplicationData";
 
 import "../styles/PhotoList.scss";
 
 const PhotoList = ({ onToggleFavorite, favoritedPhotos, onToggleModal, photoData }) => {
+  const { topicData } = useApplicationData();
   return (
     <ul className="photo-list">
       {photoData.map((photoData) => (

@@ -6,6 +6,7 @@ export const ACTIONS = {
   CLOSE_MODAL: 'CLOSE_MODAL',
   TOGGLE_FAVORITE: 'TOGGLE_FAVORITE',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
 };
 
 const initialState = {
@@ -21,6 +22,9 @@ function reducer(state, action) {
     case ACTIONS.SET_PHOTO_DATA:
       return { ...state, photoData: action.payload 
       };
+    case ACTIONS.SET_TOPIC_DATA:
+      return { ...state, topicData: action.payload 
+    };
     case ACTIONS.TOGGLE_MODAL:
       return {
         ...state,
@@ -79,6 +83,18 @@ const useApplicationData = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
+  
+  useEffect(() => {
+    fetch('/api/topics')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return {
     isModalOpen: state.isModalOpen,
@@ -89,6 +105,7 @@ const useApplicationData = () => {
     toggleFavorite,
     isPhotoFavorited,
     photoData: state.photoData,
+    topicData: state.topicData,
   };
 };
 
