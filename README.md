@@ -45,6 +45,7 @@ Follow these instructions to get the project up and running on your local machin
    ```sh
    cd frontend
    npm install
+   
    ```sh
    cd ../backend
    npm install
@@ -55,16 +56,16 @@ Start both the frontend and backend servers to experience PhotoLabs.
 
 ###Frontend
   ```sh
-     cd frontend
-     npm start
+  cd frontend
+  npm start
 The app will be accessible at http://localhost:3000.
 
 ###Backend
 Detailed instructions for setting up the backend can be found in the backend/readme file.
 
   ```sh
-     cd backend
-     npm start
+  cd backend
+  npm start
 
 ## Contributing
 We welcome contributions from the community! If you find any issues or have ideas for improvements, feel free to submit a pull request.
