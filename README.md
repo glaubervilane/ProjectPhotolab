@@ -63,6 +63,7 @@ The app will be accessible at http://localhost:3000.
 ###Backend
 Detailed instructions for setting up the backend can be found in the backend/readme file.
 
+  ```sh
   cd backend
   npm start
 
