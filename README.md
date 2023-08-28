@@ -46,7 +46,6 @@ Follow these instructions to get the project up and running on your local machin
    cd frontend
    npm install
    
-   ```sh
    cd ../backend
    npm install
 
@@ -63,7 +62,6 @@ The app will be accessible at http://localhost:3000.
 ###Backend
 Detailed instructions for setting up the backend can be found in the backend/readme file.
 
-  ```sh
   cd backend
   npm start
 
