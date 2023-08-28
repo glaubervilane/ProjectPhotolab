@@ -68,7 +68,8 @@ function reducer(state, action) {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState); 
   const [originalPhotoData, setOriginalPhotoData] = useState([]);
-  
+  const [noResults, setNoResults] = useState(false);
+  const [filteringMode, setFilteringMode] = useState(null);
 
   // Define actions to update the state
   const toggleModal = (photoData) => {
@@ -89,21 +90,19 @@ const useApplicationData = () => {
 
   const resetTopicPhotos = () => {
     dispatch({ type: ACTIONS.RESET_TOPIC_PHOTOS });
-  };  
+    setNoResults(false);
+    setFilteringMode("topic");
+  }; 
 
   const isPhotoFavorited = (photoId) => {
     return state.favoritedPhotos.includes(photoId);
   };  
   
   const search = (searchText) => {
-    const filteredPhotos = originalPhotoData.filter((photo) => {
-      const userName = photo.user.username
-        ? photo.user.username.toLowerCase()
-        : '';
+    const filteredPhotos = state.photoData.filter(photo => {
+      const userName = photo.user.username ? photo.user.username.toLowerCase() : '';
       const city = photo.location.city ? photo.location.city.toLowerCase() : '';
-      const country = photo.location.country
-        ? photo.location.country.toLowerCase()
-        : '';
+      const country = photo.location.country ? photo.location.country.toLowerCase() : '';
 
       return (
         userName.includes(searchText.toLowerCase()) ||
@@ -112,7 +111,7 @@ const useApplicationData = () => {
       );
     });
 
-    console.log('Filtered photos:', filteredPhotos);
+    setNoResults(filteredPhotos.length === 0);
     
     // Update the photoData state with filtered photos
     dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: filteredPhotos });
@@ -172,6 +171,9 @@ const useApplicationData = () => {
     fetchTopicPhotos,
     resetTopicPhotos,
     search,
+    noResults,
+    filteringMode,
+    setFilteringMode,
   };
 };
 

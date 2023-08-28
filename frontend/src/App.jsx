@@ -16,16 +16,18 @@ const App = () => {
     toggleFavorite,
     isPhotoFavorited,
     photoData,
-    topicData,    
+    topicData,
     fetchTopicPhotos,
     resetTopicPhotos,
     search,
     setSearch,
+    noResults,
+    filteringMode, // Include filteringMode in the destructured values
   } = useApplicationData();
   
   return (
     <div className="App">
-    {/* Render the main content */}
+      {/* Render the main content */}
       <HomeRoute
         openModal={toggleModal}
         isModalOpen={isModalOpen}
@@ -38,6 +40,8 @@ const App = () => {
         resetTopicPhotos={resetTopicPhotos}
         search={search} 
         setSearch={setSearch}
+        noResults={noResults}
+        filteringMode={filteringMode} // Pass filteringMode as a prop
       />
       {/* Render the modal if it's open */}
       {isModalOpen && selectedPhotoData && (

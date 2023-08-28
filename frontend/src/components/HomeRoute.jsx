@@ -24,7 +24,7 @@ const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos,
         photoData={photoData}
         selectedPhotoData={selectedPhotoData}
       />
-      {noResults && <p>No results found for the search criteria.</p>}
+      {noResults && <h2 className='search-warning'>No results found for the search criteria.</h2>}
     </div>
   );
 };
