@@ -16,7 +16,8 @@ Welcome to PhotoLabs, a project developed as part of the Web Development React c
 
 - [Main Page Application](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/main.png)
 - [Modal](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/modal.png)
-- [Topic photos](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/TopicPhotos.png)
+- [Topic photos](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/TopicPhotos.png) 
+![alt text](https://raw.githubusercontent.com/glaubervilane/ProjectPhotolab/master/frontend/public/TopicPhotos.png)
 
 ## Features
 
