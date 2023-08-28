@@ -3,7 +3,7 @@ import PhotoList from './PhotoList';
 import TopNavigationBar from './TopNavigationBar';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos, onToggleFavorite, photoData, topicData, fetchTopicPhotos, resetTopicPhotos }) => {
+const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos, onToggleFavorite, photoData, topicData, fetchTopicPhotos, resetTopicPhotos, search, setSearch, noResults }) => {
   return (
     <div className="home-route">
     {/* Top navigation bar */}
@@ -12,6 +12,8 @@ const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos,
         topicData={topicData} 
         fetchTopicPhotos={fetchTopicPhotos}
         resetTopicPhotos={resetTopicPhotos}
+        search={search} 
+        setSearch={setSearch}
       />
       {/* PhotoList component */}
       <PhotoList
@@ -22,6 +24,7 @@ const HomeRoute = ({ openModal, isModalOpen, selectedPhotoData, favoritedPhotos,
         photoData={photoData}
         selectedPhotoData={selectedPhotoData}
       />
+      {noResults && <p>No results found for the search criteria.</p>}
     </div>
   );
 };

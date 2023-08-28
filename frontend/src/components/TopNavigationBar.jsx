@@ -1,9 +1,10 @@
 import React from 'react';
 import TopicList from './TopicList';
 import FavBadge from './FavBadge';
+import SearchBar from './SearchBar';
 import '../styles/TopNavigationBar.scss';
 
-const TopNavigationBar = ({ favoritedCount, topicData, fetchTopicPhotos, resetTopicPhotos }) => {
+const TopNavigationBar = ({ favoritedCount, topicData, fetchTopicPhotos, resetTopicPhotos, search, setSearch }) => {
   return (
     <div className="top-nav-bar">
       {/* Logo link */}
@@ -21,6 +22,7 @@ const TopNavigationBar = ({ favoritedCount, topicData, fetchTopicPhotos, resetTo
       />
       {/* Display favorite badge */}
       <FavBadge isFavPhotoExist={favoritedCount > 0} />
+      <SearchBar search={search} setSearch={setSearch} />
     </div>
   );
 }

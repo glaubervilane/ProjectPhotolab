@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 // Define action types for the reducer
 export const ACTIONS = {
@@ -67,6 +67,8 @@ function reducer(state, action) {
 // Custom hook to manage application data
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState); 
+  const [originalPhotoData, setOriginalPhotoData] = useState([]);
+  
 
   // Define actions to update the state
   const toggleModal = (photoData) => {
@@ -92,6 +94,29 @@ const useApplicationData = () => {
   const isPhotoFavorited = (photoId) => {
     return state.favoritedPhotos.includes(photoId);
   };  
+  
+  const search = (searchText) => {
+    const filteredPhotos = originalPhotoData.filter((photo) => {
+      const userName = photo.user.username
+        ? photo.user.username.toLowerCase()
+        : '';
+      const city = photo.location.city ? photo.location.city.toLowerCase() : '';
+      const country = photo.location.country
+        ? photo.location.country.toLowerCase()
+        : '';
+
+      return (
+        userName.includes(searchText.toLowerCase()) ||
+        city.includes(searchText.toLowerCase()) ||
+        country.includes(searchText.toLowerCase())
+      );
+    });
+
+    console.log('Filtered photos:', filteredPhotos);
+    
+    // Update the photoData state with filtered photos
+    dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: filteredPhotos });
+  };
 
   // Fetch initial photo data when the component mounts
   useEffect(() => {
@@ -100,6 +125,7 @@ const useApplicationData = () => {
       .then((data) => {
         console.log(data);
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+        setOriginalPhotoData(data);
       })
       .catch((error) => {
         console.error('Error fetching photos:', error);
@@ -145,6 +171,7 @@ const useApplicationData = () => {
     topicData: state.topicData,
     fetchTopicPhotos,
     resetTopicPhotos,
+    search,
   };
 };
 

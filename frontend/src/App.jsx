@@ -19,6 +19,8 @@ const App = () => {
     topicData,    
     fetchTopicPhotos,
     resetTopicPhotos,
+    search,
+    setSearch,
   } = useApplicationData();
   
   return (
@@ -34,6 +36,8 @@ const App = () => {
         topicData={topicData}
         fetchTopicPhotos={fetchTopicPhotos}
         resetTopicPhotos={resetTopicPhotos}
+        search={search} 
+        setSearch={setSearch}
       />
       {/* Render the modal if it's open */}
       {isModalOpen && selectedPhotoData && (
