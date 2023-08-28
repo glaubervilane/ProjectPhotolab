@@ -12,6 +12,12 @@ Welcome to PhotoLabs, a project developed as part of the Web Development React c
 - [Contributing](#contributing)
 - [License](#license)
 
+## Screenshots
+
+- [Main Page Application](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/main.png)
+- [Modal](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/modal.png)
+- [Topic photos](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/TopicPhotos.png)
+
 ## Features
 
 - Browse a curated collection of high-quality photos
