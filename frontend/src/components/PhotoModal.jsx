@@ -42,7 +42,7 @@ function PhotoModal({
             selectedPhotoData.similarPhotos?.length > 3 ? "wrap" : ""
           }`}
         >
-          {selectedPhotoData.similar_photos?.slice(0, 3).map((photo) => (
+          {selectedPhotoData.similar_photos?.map((photo) => (
             <div className="photo-details-modal__image" key={photo.id}>
               <PhotoFavButton
                 onToggleFavorite={() => toggleFavorite(photo.id)}

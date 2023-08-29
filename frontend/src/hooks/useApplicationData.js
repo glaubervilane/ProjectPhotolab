@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { reducer, ACTIONS } from "./reducer";
+import { reducer, ACTIONS } from "./reducer"; // Adjust the path as needed
 
 const initialState = {
   isModalOpen: false,
@@ -11,6 +11,30 @@ const initialState = {
 };
 
 const useApplicationData = () => {
+  // Fetch initial photo data when the component mounts
+  useEffect(() => {
+    fetch('/api/photos')
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error('Error fetching photos:', error);
+      });
+  }, []);
+
+  // Fetch topic data when the component mounts
+  useEffect(() => {
+    fetch('/api/topics')
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error('Error fetching topics:', error);
+      });
+  }, []);
+  
   const [state, dispatch] = useReducer(reducer, initialState); 
 
   // Define actions to update the state
@@ -38,38 +62,11 @@ const useApplicationData = () => {
     return state.favoritedPhotos.includes(photoId);
   };  
 
-  // Fetch initial photo data when the component mounts
-  useEffect(() => {
-    !state.currentTopic && fetch('/api/photos')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
-      })
-      .catch((error) => {
-        console.error('Error fetching photos:', error);
-      });
-  }, [state.currentTopic]);
-  
-  // Fetch topic data when the component mounts
-  useEffect(() => {
-    fetch('/api/topics')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
-      })
-      .catch((error) => {
-        console.error('Error fetching topics:', error);
-      });
-  }, []);
-  
   // Fetch photos for the selected topic
   useEffect(() => {
     state.currentTopic && fetch(`/api/topics/photos/${state.currentTopic}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
       })
       .catch((error) => {

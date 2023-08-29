@@ -1,7 +1,7 @@
 import React from 'react';
-import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
+import useApplicationData from './hooks/useApplicationData';
 import PhotoModal from "./components/PhotoModal";
-import HomeRoute from './components/HomeRoute';
+import HomeRoute from './routes/HomeRoute';
 import './App.scss';
 import './styles/PhotoDetailsModal.scss';
 
