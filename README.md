@@ -12,6 +12,17 @@ Welcome to PhotoLabs, a project developed as part of the Web Development React c
 - [Contributing](#contributing)
 - [License](#license)
 
+## Screenshots
+
+- [Main Page Application](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/main.png)
+![alt text](https://raw.githubusercontent.com/glaubervilane/ProjectPhotolab/master/frontend/public/main.png)
+
+- [Modal](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/modal.png)
+![alt text](https://raw.githubusercontent.com/glaubervilane/ProjectPhotolab/master/frontend/public/modal.png)
+
+- [Topic photos](https://github.com/glaubervilane/ProjectPhotolab/blob/master/frontend/public/TopicPhotos.png) 
+![alt text](https://raw.githubusercontent.com/glaubervilane/ProjectPhotolab/master/frontend/public/TopicPhotos.png)
+
 ## Features
 
 - Browse a curated collection of high-quality photos
@@ -33,7 +44,7 @@ Follow these instructions to get the project up and running on your local machin
 1. Clone the repository to your local machine:
 
    ```sh
-   git clone https://github.com/your-username/react-photolabs.git
+   git clone git@github.com:glaubervilane/ProjectPhotolab.git
 
 2. Navigate to the project directory:
 
