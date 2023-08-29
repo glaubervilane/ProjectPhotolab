@@ -1,3 +1,4 @@
+/* PhotoModal.jsx */
 import React from "react";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoDetailsModal.scss";
@@ -37,20 +38,16 @@ function PhotoModal({
         </div>
         {/* Display similar photos */}
         <div className="photo-details-modal__header">Similar Photos</div>
-        <div
-          className={`photo-details-modal__similar-photo ${
-            selectedPhotoData.similarPhotos?.length > 3 ? "wrap" : ""
-          }`}
-        >
+        <div className="photo-details-modal__similar-photo">
           {selectedPhotoData.similar_photos?.map((photo) => (
-            <div className="photo-details-modal__image" key={photo.id}>
+            <div className="photo-details-modal__image small" key={photo.id}>
               <PhotoFavButton
                 onToggleFavorite={() => toggleFavorite(photo.id)}
                 isFavorited={isPhotoFavorited(photo.id)}
               />
               <img
                 src={photo.urls.regular}
-                className="photo-details-modal__similar-photo"
+                className="photo-details-modal__similar-photo-image"
                 alt={`Similar Photo by ${photo.user.username}`}
                 onClick={() => toggleModal(photo)}
               />
